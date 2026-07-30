@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🔒 系統首頁 / 分頁選單</title>
+<style>
+ :root{--bg:#0A141D;--panel:#111F2C;--grid:#2B4356;--ink:#EDF4F7;--soft:#A8BDCB;--cal:#8FB4D9;--ok:#3BD6A5;--err:#FF5D52}
+ *{box-sizing:border-box}html,body{margin:0;height:100%}
+ body{background:var(--bg);color:var(--ink);font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
+   display:flex;align-items:center;justify-content:center;min-height:100vh}
+ .card{background:var(--panel);border:1px solid var(--grid);border-radius:16px;padding:34px 30px;width:min(92vw,380px);
+   box-shadow:0 12px 40px rgba(0,0,0,.5);text-align:center}
+ .lock{font-size:34px}
+ .brand{font-size:10.5px;font-weight:800;letter-spacing:.28em;color:var(--cal);margin-top:8px}
+ h1{font-size:17px;margin:6px 0 2px}
+ .sub{font-size:12px;color:var(--soft);margin-bottom:20px;line-height:1.6}
+ input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--grid);background:#0A141D;color:var(--ink);
+   font-size:15px;text-align:center;letter-spacing:.05em;outline:none}
+ input:focus{border-color:var(--cal)}
+ button{width:100%;margin-top:12px;padding:12px;border:none;border-radius:10px;background:var(--cal);color:#0A141D;
+   font-size:15px;font-weight:800;cursor:pointer}
+ button:disabled{opacity:.55;cursor:default}
+ .err{color:var(--err);font-size:12.5px;font-weight:700;min-height:18px;margin-top:12px}
+ .foot{font-size:10.5px;color:var(--soft);margin-top:18px;line-height:1.6}
+</style></head><body>
+<div class="card">
+ <div class="lock">🔒</div>
+ <div class="brand">TS LINES FLEET SURVEY MONITOR</div>
+ <h1>需要密碼才能檢視</h1>
+ <div class="sub">系統首頁 / 分頁選單<br>本頁資料經 AES-256 加密,輸入正確密碼後在您的瀏覽器本機解密。</div>
+ <input id="pw" type="password" placeholder="請輸入密碼" autocomplete="current-password">
+ <button id="go">解鎖</button>
+ <div class="err" id="err"></div>
+ <div class="foot">僅限德翔海運內部人員使用。請勿轉傳密碼或截圖外流。</div>
+</div>
+<script>
+"use strict";
+const P={"salt":"Y5eAmcLQEKow0BmiLvbB1w==","iv":"Q9wjSPxHvjM3zFrm","ct":"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"}, ITER=200000, K="tsl_pw_v1";
+const $=id=>document.getElementById(id);
+function b64(s){return Uint8Array.from(atob(s),c=>c.charCodeAt(0));}
+async function unlock(pw){
+  const salt=b64(P.salt),iv=b64(P.iv),data=b64(P.ct);
+  const bk=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
+  const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:ITER,hash:"SHA-256"},bk,{name:"AES-GCM",length:256},false,["decrypt"]);
+  const plain=await crypto.subtle.decrypt({name:"AES-GCM",iv},key,data);
+  return new TextDecoder().decode(plain);
+}
+function render(html){document.open();document.write(html);document.close();}
+async function submit(){
+  const pw=$("pw").value; if(!pw)return;
+  $("err").textContent="";$("go").disabled=true;$("go").textContent="解密中…";
+  try{ const html=await unlock(pw); sessionStorage.setItem(K,pw); render(html); }
+  catch(e){ $("go").disabled=false;$("go").textContent="解鎖"; $("err").textContent="密碼錯誤,請再試一次。"; $("pw").select(); }
+}
+$("go").addEventListener("click",submit);
+$("pw").addEventListener("keydown",e=>{if(e.key==="Enter")submit();});
+window.addEventListener("DOMContentLoaded",async()=>{
+  const saved=sessionStorage.getItem(K);
+  if(saved){ try{ const html=await unlock(saved); render(html); return; }catch(e){ sessionStorage.removeItem(K); } }
+  $("pw").focus();
+});
+</script></body></html>
