@@ -29,11 +29,11 @@
  <input id="pw" type="password" placeholder="請輸入密碼" autocomplete="current-password">
  <button id="go">解鎖</button>
  <div class="err" id="err"></div>
- <div class="foot">僅限德翔海運內部人員使用。請勿轉傳密碼或截圖外流。</div>
+ <div class="foot">僅限德翔海運內部人員使用。請勿轉傳密碼或截圖外流。<br>閒置逾 10 分鐘將自動鎖定,需重新輸入密碼。</div>
 </div>
 <script>
 "use strict";
-const P={"salt":"2XvAm1mjLxj54BQtKC194Q==","iv":"JjFAECEwZkK8tN5o","ct":"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"}, ITER=200000, K="tsl_pw_v1";
+const P={"salt":"gq1KB5pU16ksk6Xsl2AknQ==","iv":"ypgd05XlYJv5aSCj","ct":"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"}, ITER=200000, K="tsl_pw_v1", TK="tsl_act_v1", IDLE=10*60000;
 const $=id=>document.getElementById(id);
 function b64(s){return Uint8Array.from(atob(s),c=>c.charCodeAt(0));}
 async function unlock(pw){
@@ -43,18 +43,29 @@ async function unlock(pw){
   const plain=await crypto.subtle.decrypt({name:"AES-GCM",iv},key,data);
   return new TextDecoder().decode(plain);
 }
-function render(html){document.open();document.write(html);document.close();}
+function idleScript(){
+  var s='(function(){try{var K="tsl_pw_v1",TK="tsl_act_v1",IDLE=10*60000,last=Date.now(),wrote=0;'
+   +'function persist(t){try{sessionStorage.setItem(TK,String(t));}catch(e){}}'
+   +'function touch(){last=Date.now();if(last-wrote>4000){wrote=last;persist(last);}}persist(last);'
+   +'["mousemove","mousedown","keydown","scroll","touchstart","click","wheel"].forEach(function(ev){window.addEventListener(ev,touch,{passive:true});});'
+   +'setInterval(function(){if(Date.now()-last>IDLE){try{sessionStorage.removeItem(K);sessionStorage.removeItem(TK);}catch(e){}location.reload();}},15000);'
+   +'}catch(e){}})();';
+  return '<scr'+'ipt>'+s+'</scr'+'ipt>';
+}
+function render(html){var inj=idleScript();var i=html.lastIndexOf("</body>");html=(i>=0)?html.slice(0,i)+inj+html.slice(i):html+inj;document.open();document.write(html);document.close();}
 async function submit(){
   const pw=$("pw").value; if(!pw)return;
   $("err").textContent="";$("go").disabled=true;$("go").textContent="解密中…";
-  try{ const html=await unlock(pw); sessionStorage.setItem(K,pw); render(html); }
+  try{ const html=await unlock(pw); sessionStorage.setItem(K,pw); sessionStorage.setItem(TK,String(Date.now())); render(html); }
   catch(e){ $("go").disabled=false;$("go").textContent="解鎖"; $("err").textContent="密碼錯誤,請再試一次。"; $("pw").select(); }
 }
 $("go").addEventListener("click",submit);
 $("pw").addEventListener("keydown",e=>{if(e.key==="Enter")submit();});
 window.addEventListener("DOMContentLoaded",async()=>{
   const saved=sessionStorage.getItem(K);
-  if(saved){ try{ const html=await unlock(saved); render(html); return; }catch(e){ sessionStorage.removeItem(K); } }
+  const ts=parseInt(sessionStorage.getItem(TK)||"0",10);
+  if(saved && (Date.now()-ts)<=IDLE){ try{ const html=await unlock(saved); sessionStorage.setItem(TK,String(Date.now())); render(html); return; }catch(e){ sessionStorage.removeItem(K); sessionStorage.removeItem(TK); } }
+  else if(saved){ sessionStorage.removeItem(K); sessionStorage.removeItem(TK); }
   $("pw").focus();
 });
 </script></body></html>
