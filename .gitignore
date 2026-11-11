@@ -1,0 +1,11 @@
+# 作業系統暫存檔
+.DS_Store
+Thumbs.db
+*.tmp
+
+# 含明文船隊資料的內部維護工具,禁止上傳本公開 repo
+fleet_update_log.html
+fleet_converter.html
+fleet-data.js
+system-meta.js
+*_standalone.html
